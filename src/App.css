@@ -1,38 +1,61 @@
-.App {
-  text-align: center;
+li {
+  list-style: none;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+ul {
+  padding: 0;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+#root {
+  padding: 0px 100px;
+  position: relative;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+li.TodoItem {
   display: flex;
-  flex-direction: column;
+  width: 100%;
+  justify-content: space-between;
+  padding: 20px 0px;
+  border-bottom: 1px solid #ddd;
+}
+.EditTodo,
+.Todo {
+  width: 100%;
+}
+textarea {
+  width: 100%;
+}
+.btn-area {
+  float: right;
+  flex-shrink: 0;
+  margin-left: 10px;
+  min-width: 80px;
+}
+.EditTodo form {
+  display: flex;
+  justify-content: space-between;
+}
+.Todo {
+  display: flex;
+  justify-content: space-between;
+}
+.TodoItem .check-area {
+  margin-right: 10px;
+  flex-shrink: 0;
+  display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+}
+.Todo p {
+  min-width: 60%;
+  margin: 0;
 }
 
-.App-link {
-  color: #61dafb;
+.CreateTodo {
+  padding-top: 50px;
+  width: 100%;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.CreateTodo form {
+  display: flex;
+  width: 100%;
+}
+.feedback-message {
+  font-size: small;
+  color: red;
 }

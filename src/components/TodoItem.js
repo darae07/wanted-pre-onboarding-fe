@@ -38,7 +38,7 @@ export default function TodoItem({ intialTodo, deleteTodo }) {
 
   return (
     <li className="TodoItem">
-      <div>
+      <div className="check-area">
         <label htmlFor="isCompleted">완료</label>
         <input
           type="checkbox"
