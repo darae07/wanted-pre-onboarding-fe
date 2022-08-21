@@ -1,7 +1,7 @@
 import { getItem } from "../util/storage";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { CreateTodo } from "../components";
+import { CreateTodo, TodoItem } from "../components";
 import { authorizedInstance } from "../api/api";
 
 export default function TodoListPage() {
@@ -30,6 +30,13 @@ export default function TodoListPage() {
     ]);
   };
 
+  const deleteTodo = (id) => {
+    const nextTodoList = [...todoList];
+    const deleteTodoIndex = nextTodoList.findIndex((todo) => todo.id === id);
+    nextTodoList.splice(deleteTodoIndex, 1);
+    setTodoList(nextTodoList);
+  };
+
   useEffect(() => {
     if (!access_token) {
       navigate("/");
@@ -41,6 +48,11 @@ export default function TodoListPage() {
   return (
     <div>
       <h1>TODO 리스트</h1>
+      <ul>
+        {todoList.map((todo) => (
+          <TodoItem key={todo.id} intialTodo={todo} deleteTodo={deleteTodo} />
+        ))}
+      </ul>
       <CreateTodo addTodo={addTodo} />
     </div>
   );
