@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { anonymousInstance } from "../api/api";
 
 const initialLoginValues = {
   email: "",
@@ -25,11 +26,22 @@ export default function Login() {
     setValues(nextValues);
   };
 
-  const submit = () => {};
+  const submit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await anonymousInstance.post("auth/signin", {
+        email: loginValues.email,
+        password: loginValues.password,
+      });
+      console.log(response);
+    } catch (e) {
+      alert(e.response?.data?.message || e.message);
+    }
+  };
 
   return (
     <div className="Login">
-      <form>
+      <form onSubmit={submit}>
         <div>
           <label htmlFor="email">이메일</label>
           <input
@@ -58,7 +70,6 @@ export default function Login() {
         </div>
         <button
           type="submit"
-          onSubmit={submit}
           disabled={
             !(loginValues.emailValidated && loginValues.passwordValidated)
           }
