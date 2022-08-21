@@ -4,7 +4,7 @@ import { authorizedInstance } from "../api/api";
 const initialTodoValues = {
   todo: "",
 };
-export default function CreateTodo() {
+export default function CreateTodo({ addTodo }) {
   const [values, setValues] = useState(initialTodoValues);
   const handleInput = (e) => {
     const {
@@ -21,7 +21,7 @@ export default function CreateTodo() {
     e.preventDefault();
     try {
       const response = await authorizedInstance.post("todos", values);
-      console.log(response);
+      addTodo(response.data);
     } catch (e) {
       alert(e.response?.data?.message || e.message);
     }
