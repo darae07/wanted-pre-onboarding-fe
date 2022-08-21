@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { anonymousInstance } from "../api/api";
+import { setItem } from "../util/storage";
 
 const initialLoginValues = {
   email: "",
@@ -8,7 +9,8 @@ const initialLoginValues = {
   passwordValidated: false,
 };
 
-export default function Login() {
+export default function Auth({ type }) {
+  const title = type === "signin" ? "로그인" : "회원가입";
   const [loginValues, setValues] = useState(initialLoginValues);
 
   const handleInput = (e) => {
@@ -29,11 +31,13 @@ export default function Login() {
   const submit = async (e) => {
     e.preventDefault();
     try {
-      const response = await anonymousInstance.post("auth/signin", {
+      const response = await anonymousInstance.post(`auth/${type}`, {
         email: loginValues.email,
         password: loginValues.password,
       });
       console.log(response);
+      setItem("access_token", response.data.access_token);
+      alert(`${title} 성공`);
     } catch (e) {
       alert(e.response?.data?.message || e.message);
     }
