@@ -32,7 +32,7 @@ export default function CreateTodo({ addTodo }) {
       <form onSubmit={submit}>
         <div>
           <label htmlFor="todo"></label>
-          <input name="todo" value={values.todo} onChange={handleInput} />
+          <textarea name="todo" value={values.todo} onChange={handleInput} />
         </div>
         <button type="submit">추가</button>
       </form>

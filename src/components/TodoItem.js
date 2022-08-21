@@ -38,13 +38,15 @@ export default function TodoItem({ intialTodo, deleteTodo }) {
 
   return (
     <li className="TodoItem">
-      <label htmlFor="isCompleted">완료</label>
-      <input
-        type="checkbox"
-        name="isCompleted"
-        value={todo.isCompleted}
-        onChange={toggleCompleteTodo}
-      />
+      <div>
+        <label htmlFor="isCompleted">완료</label>
+        <input
+          type="checkbox"
+          name="isCompleted"
+          value={todo.isCompleted}
+          onChange={toggleCompleteTodo}
+        />
+      </div>
 
       {editMode ? (
         <EditTodo
@@ -54,14 +56,16 @@ export default function TodoItem({ intialTodo, deleteTodo }) {
           setTodo={setTodo}
         />
       ) : (
-        <div>
+        <div className="Todo">
           <p>{todo.todo}</p>
-          <button type="button" onClick={toggleEditMode}>
-            수정
-          </button>
-          <button type="button" onClick={fetchDeleteTodo}>
-            삭제
-          </button>
+          <div className="btn-area">
+            <button type="button" onClick={toggleEditMode}>
+              수정
+            </button>
+            <button type="button" onClick={fetchDeleteTodo}>
+              삭제
+            </button>
+          </div>
         </div>
       )}
     </li>
@@ -86,9 +90,9 @@ const EditTodo = ({ intialTodo, toggleEditMode, editTodo, setTodo }) => {
   return (
     <div className="EditTodo">
       <form onSubmit={submit}>
-        <input value={todoValues.todo} name="todo" onChange={handleInput} />
+        <textarea value={todoValues.todo} name="todo" onChange={handleInput} />
 
-        <div>
+        <div className="btn-area">
           <button type="button" onClick={toggleEditMode}>
             취소
           </button>
